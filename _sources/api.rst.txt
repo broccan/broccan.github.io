@@ -1,0 +1,59 @@
+API Reference
+=============
+
+.. currentmodule:: amr_sim
+
+
+Simulation Class
+----------------
+
+.. autoclass:: Simulation
+    :members:
+
+
+Default Sprite Images
+---------------------
+
+.. autoclass:: basic_images
+
+
+The Sprite Classes
+------------------
+
+.. autoclass:: Sprite
+    :members:
+
+.. autoclass:: Dot
+    :members:
+
+.. autoclass:: Vehicle
+    :members:
+
+.. autoclass:: DifferentialDrive
+    :members:
+
+Position Class
+--------------
+.. autoclass:: Position
+    :members:
+
+Light Class and Functions
+-------------------------
+
+.. autoclass:: Light
+    :members:
+
+.. autofunction:: mix_colour
+
+.. autofunction:: dist_two_points
+
+Sonar Class
+-----------
+
+.. autoclass:: Sonar
+    :members:
+
+Exceptions
+----------
+
+.. autofunction:: InitalisationCollision

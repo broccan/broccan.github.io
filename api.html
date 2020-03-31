@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>API Reference &#8212; AMR Assignment 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basic tutorial" href="tutorial.html" />
+    <link rel="prev" title="Welcome to AMR Assignment’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="simulation-class">
+<h2>Simulation Class<a class="headerlink" href="#simulation-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="amr_sim.Simulation">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Simulation</code><span class="sig-paren">(</span><em class="sig-param">screen_dim</em>, <em class="sig-param">clock_rate</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for handing the displaying and interation with the simulation
+environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>screen_dim</strong> (<em>tuple of int</em>) – the screen dimension in pixels (x, y)</p></li>
+<li><p><strong>clock_rate</strong> (<em>int</em>) – The rate in Hz to update the simulation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Simulation.arrow_keys">
+<code class="sig-name descname">arrow_keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.arrow_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function which returns the current keys which are being pressed following
+this format:
+hor = -1 -&gt; down, hor = 1 -&gt; up, vert = -1 -&gt; left, vert = 1 -&gt; right</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(hor, vert), two ints depicting which arrow is currently pressed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int, int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.background_set">
+<code class="sig-name descname">background_set</code><span class="sig-paren">(</span><em class="sig-param">lights</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.background_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the background based off of a list of Light objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lights</strong> (<em>List of Light</em>) – A list of lights to overlay onto the background</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.change_sprite">
+<code class="sig-name descname">change_sprite</code><span class="sig-paren">(</span><em class="sig-param">sprite</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.change_sprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function to to return the next sprite in the simulation, if only one
+sprite it returns that one and if no sprites returns None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sprite</strong> (<a class="reference internal" href="#amr_sim.Sprite" title="amr_sim.Sprite"><em>Sprite</em></a>) – The current sprite selected</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The next sprite in the list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Sprite" title="amr_sim.Sprite">Sprite</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="amr_sim.Simulation.clock">
+<code class="sig-name descname">clock</code><em class="property"> = None</em><a class="headerlink" href="#amr_sim.Simulation.clock" title="Permalink to this definition">¶</a></dt>
+<dd><p>pygame.clock: pygame clock of the simulation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.draw_dot">
+<code class="sig-name descname">draw_dot</code><span class="sig-paren">(</span><em class="sig-param">colour</em>, <em class="sig-param">center</em>, <em class="sig-param">radius</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.draw_dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a static dot on the screen but with no collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colour</strong> (<em>tuple of int</em>) – (r,g,b) The colour of the dot using rgb values
+ints from 0 to 255</p></li>
+<li><p><strong>center</strong> (<em>tuple of floats</em><em> or </em><em>ints</em>) – A (x, y) tuple with the coordinated of the center of the dot</p></li>
+<li><p><strong>radius</strong> (<em>int</em>) – The radius of the dot</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.draw_line">
+<code class="sig-name descname">draw_line</code><span class="sig-paren">(</span><em class="sig-param">colour</em>, <em class="sig-param">start</em>, <em class="sig-param">direction</em>, <em class="sig-param">length</em>, <em class="sig-param">width</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.draw_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a static line on the screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colour</strong> (<em>tuple of int</em>) – (r,g,b) The colour of the line using rgb values
+ints from 0 to 255</p></li>
+<li><p><strong>start</strong> (<em>tuple of int</em>) – (x, y), The co-ordinates of the middle of the
+line at one end</p></li>
+<li><p><strong>direction</strong> (<em>char</em>) – The char ‘x’ or ‘y’ depicting the direction the line goes</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – The length of the line in pixels</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – The width of the line in pixels</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.draw_rect">
+<code class="sig-name descname">draw_rect</code><span class="sig-paren">(</span><em class="sig-param">colour</em>, <em class="sig-param">top_left</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">line_thickness</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.draw_rect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a static rectangle object on the screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colour</strong> (<em>tuple of int</em>) – (r,g,b) The colour of the line using rgb values
+ints from 0 to 255</p></li>
+<li><p><strong>top_left</strong> (<em>tuple of int</em>) – (x, y), The co-ordinates of the top left of the rectangle</p></li>
+</ul>
+</dd>
+</dl>
+<p>:param width:The width of the rectangle from outside to outside
+:type width: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> (<em>int</em>) – The height of the rectangle from outside to outside</p></li>
+<li><p><strong>line_thickness</strong> (<em>int</em>) – The tickness of the rectangle boarder,
+if 0 the rectangle will be filled</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.events_detection">
+<code class="sig-name descname">events_detection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.events_detection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses the event detection from pygame to set the arrow key variables
+which allow for multi key handling on the arrows. This is required if
+arrow_keys() function is to be used. It returns the dictionary of keys
+which event detection have been activated using the self.keys variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dict with which keys in the self.keys dict have changed,
+0 = no change, 1 = key pressed, -1 = key released</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.init_car">
+<code class="sig-name descname">init_car</code><span class="sig-paren">(</span><em class="sig-param">center</em>, <em class="sig-param">angle</em>, <em class="sig-param">image=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.init_car" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a car sprites centered at the given position with the given
+angle with the given image object. If no image object given a default
+is used</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>pygame.Image</em>) – the image object</p></li>
+<li><p><strong>center</strong> (<em>tuple of int</em>) – the initial center of the vehicle (x, y)</p></li>
+<li><p><strong>angle</strong> – The angle the vehicle starts in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A vehicle sprite instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Vehicle" title="amr_sim.Vehicle">Vehicle</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.init_diff_drive">
+<code class="sig-name descname">init_diff_drive</code><span class="sig-paren">(</span><em class="sig-param">center</em>, <em class="sig-param">angle</em>, <em class="sig-param">wheel_center</em>, <em class="sig-param">wheel_seperation</em>, <em class="sig-param">wheel_radius</em>, <em class="sig-param">image=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.init_diff_drive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a differential drive sprites centered at the given position with
+the given angle with the given image object and specifications. If no
+image object given a default is used</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>pygame.Image</em>) – the image object</p></li>
+<li><p><strong>center</strong> (<em>tuple of int</em>) – the initial center of the vehicle (x, y)</p></li>
+<li><p><strong>angle</strong> – The angle the vehicle starts in</p></li>
+<li><p><strong>wheel_center</strong> (<em>pygame.math.Vector2</em>) – The location of the driving wheels center point in
+local coordinates</p></li>
+<li><p><strong>wheel_seperation</strong> (<em>float</em>) – How far apart the wheels are</p></li>
+<li><p><strong>wheel_radius</strong> (<em>float</em>) – The radius of the wheels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A vehicle sprite instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Vehicle" title="amr_sim.Vehicle">Vehicle</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.init_dot">
+<code class="sig-name descname">init_dot</code><span class="sig-paren">(</span><em class="sig-param">center</em>, <em class="sig-param">radius=None</em>, <em class="sig-param">image=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.init_dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dot sprites centered at the given position with the given
+radius with the given image object. If only center given a default image
+object is used</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>pygame.Image</em>) – the image object</p></li>
+<li><p><strong>center</strong> (<em>tuple of int</em>) – the initial center of the dot (x, y)</p></li>
+<li><p><strong>radius</strong> (<em>int</em>) – The radius of the dot in pixels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dot sprite instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Dot" title="amr_sim.Dot">Dot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="amr_sim.Simulation.keys">
+<code class="sig-name descname">keys</code><em class="property"> = None</em><a class="headerlink" href="#amr_sim.Simulation.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict: keys to check for changes, add custom keys from pygame
+for them to be returned in event_detection dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.point_collision">
+<code class="sig-name descname">point_collision</code><span class="sig-paren">(</span><em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.point_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detects if a point collides with any objects or sprites</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>pygame.math.Vector2</em>) – A point to test</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A boolean if a collision has a occurred, true for occurred, false for not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.ray">
+<code class="sig-name descname">ray</code><span class="sig-paren">(</span><em class="sig-param">vect</em>, <em class="sig-param">angle</em>, <em class="sig-param">max_len=500</em>, <em class="sig-param">step=2</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.ray" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that detects the distance from a point to an object at a given
+angle, can be considered like a LIDAR ray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vect</strong> (<em>pygame.math.Vector2</em>) – The start position of the ray</p></li>
+<li><p><strong>angle</strong> (<em>float</em><em> or </em><em>int</em>) – The angle the ray travels</p></li>
+<li><p><strong>max_len</strong> (<em>int</em>) – the maximum distance the ray will travel</p></li>
+<li><p><strong>step</strong> (<em>int</em>) – the step size taken for checking for collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>length and the end point of the ray</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>length = float, end_point = pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="amr_sim.Simulation.running">
+<code class="sig-name descname">running</code><em class="property"> = None</em><a class="headerlink" href="#amr_sim.Simulation.running" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool: Running variable to control main loop of program,
+becomes False when quit event received</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.update_display">
+<code class="sig-name descname">update_display</code><span class="sig-paren">(</span><em class="sig-param">flip=True</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.update_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the screen with the current position of all the sprites and
+static objects placed onto the screen. If the flip value is False then
+the displaying of this update is not performed so other objects can be
+placed on the screen before the update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flip</strong> (<em>bool</em>) – A bool to depict if the screen is updated or left to be done externally</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.value_func">
+<code class="sig-name descname">value_func</code><span class="sig-paren">(</span><em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.value_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value of the combined light functions for a given point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>pygame.math.Vector2</em>) – The point to get the value of all the lights from</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the sum of all the light values at the given point</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Simulation.wait">
+<code class="sig-name descname">wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Simulation.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function delays to keep the main loop under the set frame rate.
+It also saves the tick variable in the clock which allows for velocities
+to be calculated correctly, so must be placed at the end of the control
+loop when using this library</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="default-sprite-images">
+<h2>Default Sprite Images<a class="headerlink" href="#default-sprite-images" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="amr_sim.basic_images">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">basic_images</code><a class="headerlink" href="#amr_sim.basic_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class holding the basic pygame image objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Const dot</dt>
+<dd class="field-odd"><p>Image object contianing a basic dot</p>
+</dd>
+<dt class="field-even">Const car</dt>
+<dd class="field-even"><p>Image object contianing a basic car</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="the-sprite-classes">
+<h2>The Sprite Classes<a class="headerlink" href="#the-sprite-classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="amr_sim.Sprite">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Sprite</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">image</em>, <em class="sig-param">center</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite" title="Permalink to this definition">¶</a></dt>
+<dd><p>A parent class to hold all the basic functions and variables used by
+moveable sprites in the 2D environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – The simulation instance which the sprite is running in</p></li>
+<li><p><strong>image</strong> (<em>string</em>) – the pygame image object to display</p></li>
+<li><p><strong>center</strong> (<em>tuple of floats</em><em> or </em><em>ints</em>) – A (x, y) tuple with the coordinated of the center of the sprite</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Sprite.collision_detection">
+<code class="sig-name descname">collision_detection</code><span class="sig-paren">(</span><em class="sig-param">pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.collision_detection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test to see if any collisions occur</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to test</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True for has collided, False for hasn’t</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.display">
+<code class="sig-name descname">display</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the sprites image on the screen, and returns the updated Rect
+for efficient display update if required</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The Rect of the area changed with the image update</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pygame.Rect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.internal_collision">
+<code class="sig-name descname">internal_collision</code><span class="sig-paren">(</span><em class="sig-param">pos</em>, <em class="sig-param">test_points</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.internal_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if any points from test points list are found inside the vehicle
+boundary for collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to calculate if any point collide internally</p></li>
+<li><p><strong>test_points</strong> (<em>List of pygame.math.Vector2</em>) – The points to test for an internal collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A boolean if an internal collision has a occurred true for
+occurred, false for not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.line_collision">
+<code class="sig-name descname">line_collision</code><span class="sig-paren">(</span><em class="sig-param">pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.line_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test to see if the sprite collides with any object on the screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to test, uses current pos if none is given</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True for a collision, False for none</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.max_points">
+<code class="sig-name descname">max_points</code><span class="sig-paren">(</span><em class="sig-param">pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.max_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>The points at the edge of the object to be used in object detection.
+This is a placeholder class and needs to be implemented in child classes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to calculate the max points</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of points as pygame Vects that are the max points</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List of pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.other_sprites">
+<code class="sig-name descname">other_sprites</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.other_sprites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all the other sprites except the current, useful for
+manually controlling multiple sprites or collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of all the other sprites in the simulation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List of Sprite</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.screen_bound_collision">
+<code class="sig-name descname">screen_bound_collision</code><span class="sig-paren">(</span><em class="sig-param">pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.screen_bound_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test to see if the sprite leaves the screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to test, uses current pos if none is given</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A boolean for if the sprite has left the screen, true for has</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sprite.translate">
+<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param">dist_x</em>, <em class="sig-param">dist_y</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sprite.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates the sprite the set x and y distances relative to the current
+position. Modifies the current sprite instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist_x</strong> (<em>float</em>) – The distance to translate the sprite in the x direction,
+right is positive</p></li>
+<li><p><strong>dist_y</strong> – The distance to translate the sprite in the y direction,
+down is positive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A bool to indicate if a collision occurred, True is no collsion,
+False collision occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="amr_sim.Dot">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Dot</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">center</em>, <em class="sig-param">radius=None</em>, <em class="sig-param">image=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>A round sprite that uses the radius for collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – The simulation instance which the sprite is running in</p></li>
+<li><p><strong>image</strong> (<em>pygame.Image</em>) – the pygame.Image object used for the sprite</p></li>
+<li><p><strong>center</strong> (<em>tuple of floats</em><em> or </em><em>ints</em>) – A (x, y) tuple with the coordinated of the center of the sprite</p></li>
+<li><p><strong>radius</strong> (<em>int</em>) – The radius of the circular sprite in pixels</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Dot.internal_collision">
+<code class="sig-name descname">internal_collision</code><span class="sig-paren">(</span><em class="sig-param">pos</em>, <em class="sig-param">test_points</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Dot.internal_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if any points are inside the vehicle boundary</p>
+<p>Test if any points from test points list are found inside the vehicle
+boundary for collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to calculate if any point collide internally</p></li>
+<li><p><strong>test_points</strong> (<em>List of pygame.math.Vector2</em>) – The points to test for an internal collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A boolean if an internal collision has a occurred true for
+occurred, false for not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Dot.max_points">
+<code class="sig-name descname">max_points</code><span class="sig-paren">(</span><em class="sig-param">pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Dot.max_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>The points at the edge of the object to be used in object detection. The
+circle has 8 points for this seperated by 45 degrees</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to calculate the max points</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of points as pygame Vects that are the max points</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List of pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Dot.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">x_speed</em>, <em class="sig-param">y_speed</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Dot.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the sprite at a set speed with x and y components</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_speed</strong> (<em>float</em>) – the speed the circle is moving in the x direction in m/s
+, right is positive</p></li>
+<li><p><strong>y_speed</strong> (<em>float</em>) – the speed the circle is moving in the y direction in m/s
+, down is positive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A bool to indicate if move occurred unhindered, True is no
+collsion, False collision occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="amr_sim.Vehicle">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Vehicle</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">center</em>, <em class="sig-param">image=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Vehicle" title="Permalink to this definition">¶</a></dt>
+<dd><p>A rectangular shape sprite that uses width and height for calculations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – The simulation instance which the sprite is running in</p></li>
+<li><p><strong>image</strong> (<em>pygame.Image</em>) – the pygame.Image object used for the sprite</p></li>
+<li><p><strong>center</strong> (<em>tuple of floats</em><em> or </em><em>ints</em>) – A (x, y) tuple with the coordinated of the center of the sprite</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Vehicle.internal_collision">
+<code class="sig-name descname">internal_collision</code><span class="sig-paren">(</span><em class="sig-param">pos</em>, <em class="sig-param">test_points</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Vehicle.internal_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if any points from test points list are found inside the vehicle
+boundary for collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to calculate if any point collide internally</p></li>
+<li><p><strong>test_points</strong> (<em>List of pygame.math.Vector2</em>) – The points to test for an internal collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A boolean if an internal collision has a occurred true for
+occurred, false for not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Vehicle.max_points">
+<code class="sig-name descname">max_points</code><span class="sig-paren">(</span><em class="sig-param">pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Vehicle.max_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>The points at the edge of the object to be used in collision detection.
+The vehicle uses its corners for this</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position"><em>Position</em></a>) – The position to calculate the maximum max points</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of points as pygame Vects that are the max points</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List of pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Vehicle.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">speed</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Vehicle.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the vehicle that in the direction it is facing at the set speed in
+pixels per second. Forwards is positive, backwards is negative. Returns
+if a collision occurred</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>speed</strong> (<em>float</em>) – The speed to move the vehicle at</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True is no collsion, False collision occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Vehicle.rotate_about_point">
+<code class="sig-name descname">rotate_about_point</code><span class="sig-paren">(</span><em class="sig-param">angle</em>, <em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Vehicle.rotate_about_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate the sprite at a set velocity around the set point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ang_vel</strong> (<em>float</em>) – The angular velocity to rotate around the set point,
+CCW is positive</p></li>
+<li><p><strong>point</strong> (<em>pygame.math.Vector2</em>) – the vector point about which to rotate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A bool to indicate if any rotation was made, True for rotation occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Vehicle.rotate_vel">
+<code class="sig-name descname">rotate_vel</code><span class="sig-paren">(</span><em class="sig-param">ang_vel</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Vehicle.rotate_vel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate the sprite at a set velocity around the center point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ang_vel</strong> (<em>float</em>) – The angular velocity to rotate at, CCW is positive</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True for rotation occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="amr_sim.DifferentialDrive">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">DifferentialDrive</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">center</em>, <em class="sig-param">wheel_center</em>, <em class="sig-param">wheel_seperation</em>, <em class="sig-param">wheel_radius</em>, <em class="sig-param">image=None</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.DifferentialDrive" title="Permalink to this definition">¶</a></dt>
+<dd><p>A vehicle sprite with differential drive kinematics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – The simulation instance which the sprite is running in</p></li>
+<li><p><strong>image</strong> (<em>pygame.Image</em>) – the pygame.Image object used for the sprite</p></li>
+<li><p><strong>center</strong> (<em>tuple of floats</em><em> or </em><em>ints</em>) – A (x, y) tuple with the coordinated of the center of the sprite</p></li>
+<li><p><strong>wheel_center</strong> (<em>pygame.math.Vector2</em>) – The position of the center of wheels relative to the center point</p></li>
+<li><p><strong>wheel_seperation</strong> (<em>float</em>) – How far apart the wheels are</p></li>
+<li><p><strong>wheel_radius</strong> (<em>float</em>) – The radius of the wheels</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.DifferentialDrive.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">L_omega</em>, <em class="sig-param">R_omega</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.DifferentialDrive.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the vehicle based upon the left and right wheel velocities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L_omega</strong> (<em>float</em>) – The angular velocity of the left wheel in rad/s</p></li>
+<li><p><strong>R_omega</strong> (<em>float</em>) – The angular velocity of the right wheel in rad/s</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True is no collsion, False collision occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="position-class">
+<h2>Position Class<a class="headerlink" href="#position-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="amr_sim.Position">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Position</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">angle=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position" title="Permalink to this definition">¶</a></dt>
+<dd><p>This classed is imported into Sprite classes and has been constructed
+to allow for easier passing of coordinates + angles. It also includes
+functions that are used when dealing with frames of references</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em><em> or </em><em>float</em>) – The x coordinate of the center point, right is positive</p></li>
+<li><p><strong>y</strong> (<em>int</em><em> or </em><em>float</em>) – The y coordinate of the center point, down is positive</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – The width of the object in pixels</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – The height of the object in pixels</p></li>
+<li><p><strong>angle</strong> (<em>int</em><em> or </em><em>float</em>) – The angle of the object in degrees, positive x axis
+is 0 and CCW is positive</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Position.corners">
+<code class="sig-name descname">corners</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.corners" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that calculates the corner coordinates of the square relative
+to global frame of reference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of the coordinates of corners globally in pygame vect2</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List of pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.corners_local">
+<code class="sig-name descname">corners_local</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.corners_local" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that calculates the corner coordinates of the square relative
+to local frame of reference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of the local coordinates of corners in pygame vect2</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List of pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.global_to_local">
+<code class="sig-name descname">global_to_local</code><span class="sig-paren">(</span><em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.global_to_local" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms a vector point from the global frame to the local frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>pygame.math.Vector2</em>) – the point to transform from the global frame to the local</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the point in the local frame</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.local_rect">
+<code class="sig-name descname">local_rect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.local_rect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the local pygame.Rect of the position</p>
+<p>Calculates the local pygame.Rect of the current position that is used in
+collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A pygame Rect in the local coordinates</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pygame.Rect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.local_to_global">
+<code class="sig-name descname">local_to_global</code><span class="sig-paren">(</span><em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.local_to_global" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms a vector point from the local to the global frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>pygame.math.Vector2</em>) – the point to transform from the local frame to the global</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the point in the global frame</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.rect">
+<code class="sig-name descname">rect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.rect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a pygame Rect in the global frame suiting the pygame standard
+This is useful for collision detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Rect in the global frame</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pygame.Rect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.rotate">
+<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param">angle</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the position about its center in degrees, where CCW is positive,
+returning a Position instance with the new rotation, and does not modify
+the original instance in any way</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>angle</strong> (<em>int</em><em> or </em><em>float</em>) – The angle to rotate in degrees, CCW is positive</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new position instance rotated angle degrees</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position">Position</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.rotate_about_point">
+<code class="sig-name descname">rotate_about_point</code><span class="sig-paren">(</span><em class="sig-param">angle</em>, <em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.rotate_about_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the position about the set vector point in degrees, where CCW is
+positive, returning a Position instance with the new rotation, and does
+not modify the original instance in any way</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle</strong> (<em>int</em><em> or </em><em>float</em>) – The angle to rotate the position instance by in degrees,
+CCW is positive</p></li>
+<li><p><strong>point</strong> (<em>pygame.math.Vector2</em>) – the vector point about which to rotate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new position instance tranlated angle degrees</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position">Position</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Position.translate">
+<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Position.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates the position the set number of x and y pixels, returning a
+Position instance at the new location, and does not modify the original
+instance in any way</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em><em> or </em><em>float</em>) – Distance to translate in x direction, right is positive</p></li>
+<li><p><strong>y</strong> (<em>int</em><em> or </em><em>float</em>) – Distance to translate in y direction, down is positive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new position instance tranlated by x and y</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amr_sim.Position" title="amr_sim.Position">Position</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="light-class-and-functions">
+<h2>Light Class and Functions<a class="headerlink" href="#light-class-and-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="amr_sim.Light">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Light</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">colour</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Light" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class that represents a light in a braitenberg vehicle setup, and all
+the functions associated with calculating it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em><em> or </em><em>float</em>) – The x coordinate of the center point, right is positive</p></li>
+<li><p><strong>y</strong> (<em>int</em><em> or </em><em>float</em>) – The y coordinate of the center point, down is positive</p></li>
+<li><p><strong>colour</strong> (<em>pygame.Color</em>) – The colour that the light is</p></li>
+<li><p><strong>function</strong> (<em>A function that takes either one</em><em> or </em><em>two floats and returns a float</em>) – The function used to determine the brightess of the colour</p></li>
+<li><p><strong>dist_func</strong> – Determines if the function uses one value the distance from
+the center, or two values the x and y coordinates of the pixel</p></li>
+<li><p><strong>dist_func</strong> – bool</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Light.colour_at_point">
+<code class="sig-name descname">colour_at_point</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Light.colour_at_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the colour at the point based on the current background
+colour and the intensity of the light from this instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em><em> or </em><em>float</em>) – The x coordinate of the point to calculate the colour at, right is positive</p></li>
+<li><p><strong>y</strong> (<em>int</em><em> or </em><em>float</em>) – The y coordinate of the point to calculate the colour at, down is positive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The colour of the light at that point</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pygame.Color</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Light.value_at_point">
+<code class="sig-name descname">value_at_point</code><span class="sig-paren">(</span><em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Light.value_at_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value of the function at that point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em><em> or </em><em>float</em>) – The x coordinate of the point to calculate the colour at,
+right is positive</p></li>
+<li><p><strong>y</strong> (<em>int</em><em> or </em><em>float</em>) – The y coordinate of the point to calculate the colour at,
+down is positive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the function at the point</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="amr_sim.mix_colour">
+<code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">mix_colour</code><span class="sig-paren">(</span><em class="sig-param">colour_1</em>, <em class="sig-param">colour_2</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.mix_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function used for mixing pygame colours</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colour_1</strong> (<em>pygame.Color</em>) – One of the colours to combine</p></li>
+<li><p><strong>colour_2</strong> (<em>pygame.Color</em>) – One of the colours to combine</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The mixed colour</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pygame.Color</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="amr_sim.dist_two_points">
+<code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">dist_two_points</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.dist_two_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distance between two points which allows for easy function
+creation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>int</em><em> or </em><em>float</em>) – x coordinate of point 1</p></li>
+<li><p><strong>b</strong> (<em>int</em><em> or </em><em>float</em>) – y coordinate of point 1</p></li>
+<li><p><strong>x</strong> (<em>int</em><em> or </em><em>float</em>) – x coordinate of point 2</p></li>
+<li><p><strong>y</strong> (<em>int</em><em> or </em><em>float</em>) – y coordinate of point 2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>distance between points</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="sonar-class">
+<h2>Sonar Class<a class="headerlink" href="#sonar-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="amr_sim.Sonar">
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Sonar</code><span class="sig-paren">(</span><em class="sig-param">direction</em>, <em class="sig-param">beam_width</em>, <em class="sig-param">max_length</em>, <em class="sig-param">density=1</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class that uses rays at set angle to simulate a sonar sensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<em>pygame.math.Vector2</em>) – A vector in the direction of the sonar</p></li>
+<li><p><strong>beam_width</strong> (<em>float</em><em> or </em><em>int</em>) – The angle width of the sonar beam</p></li>
+<li><p><strong>max_length</strong> (<em>float</em><em> or </em><em>int</em>) – The maximum length of the beam</p></li>
+<li><p><strong>density</strong> (<em>float</em><em> or </em><em>int</em>) – The distance between the points in the beam</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="amr_sim.Sonar.get_dist">
+<code class="sig-name descname">get_dist</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">location</em>, <em class="sig-param">rotation</em>, <em class="sig-param">visible=False</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar.get_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the distance from the sonar module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – Simulation instance to place the sonar on</p></li>
+<li><p><strong>location</strong> (<em>pygame.math.Vector2</em>) – the global point where the sonar comes from</p></li>
+<li><p><strong>rotation</strong> (<em>float</em>) – The global angle of the sonar beam</p></li>
+<li><p><strong>visible</strong> (<em>bool</em>) – Flag to set to draw dots or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The length to detected object and the local point where it
+it was detected, this point is None if no object detected</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float, pygame.math.Vector2</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="amr_sim.InitalisationCollision">
+<code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">InitalisationCollision</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.InitalisationCollision" title="Permalink to this definition">¶</a></dt>
+<dd><p>An exception class for when a sprite is initialised and a collision occurs</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">AMR Assignment</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-class">Simulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-sprite-images">Default Sprite Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-sprite-classes">The Sprite Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#position-class">Position Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#light-class-and-functions">Light Class and Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sonar-class">Sonar Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Basic tutorial</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to AMR Assignment’s documentation!</a></li>
+      <li>Next: <a href="tutorial.html" title="next chapter">Basic tutorial</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Brennan Penfold.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

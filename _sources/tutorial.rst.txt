@@ -1,0 +1,66 @@
+Tutorial
+========
+
+.. currentmodule:: amr_sim
+
+
+Basics
+------
+
+Import
+++++++
+amr_sim is built from the pygame library and uses lots of objects
+from this library, so importing the pygame library is required for some
+the use some of the amr_sim objects. The only classes needed for the basic
+simulation is :class:`Simulation` and :class:`basic_images`::
+
+    import pygame
+    from amr_sim import Simulation, basic_images
+
+Create screen
++++++++++++++
+Creating an instalnce of the :class:`Simulation` class requires the dimensions of 
+desired screen in pixels and the desired maximum update rate of the Simulation::
+
+    screen_dim = 500, 500
+    update_rate = 60
+
+    sim = Simulation(screen_dim, update_rate)
+
+Main loop
++++++++++
+There is inbuilt functions to end the Simulation when the window is closed, these
+functions are tied to the variable :attr:`Simulation.running`, so the while loop
+should start with::
+
+    while sim.running:
+
+The main loop also needs to run :func:`Simulation.events_detection` to get the events 
+which end the while loop.::
+
+    sim.events_detection()
+
+To display the all objects that have been placed into the simulation (none at this
+point in time) :func:`Simulation.update_display` needs to be run after all movements have
+occurred.::
+
+    sim.update_display()
+
+To reduce the load on the cpu and update the pygame.Clock for speed calculations the
+:func:`Simulation.wait` function needs to be called, where the program will pause to
+match the frame rate set when initialising the :class:`Simulation instance`::
+
+    sim.wait()
+
+The final main loop should look like the following::
+
+    while sim.running:
+
+        # Move, rotate, translate and take any measurements requires here
+
+        # Update the simulation display
+        sim.display()
+
+        # Wait to maintain frame rate
+        sim.wait()
+

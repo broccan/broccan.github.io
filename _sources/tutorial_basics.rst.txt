@@ -1,0 +1,27 @@
+Basic tutorial
+==============
+
+.. currentmodule:: amr_sim
+
+
+Basics
+------
+
+Import
+++++++
+amr_sim is built from the pygame library and uses lots of objects
+from this library, so importing the pygame library is required for some
+the use some of the amr_sim objects. The only classes needed for the basic
+simulation is :class:Simulation and :class:basic_images::
+    import pygame
+    from amr_sim import Simulation, basic_images
+
+Create screen
++++++++++++++
+Creating an instalnce of the :class:Simulation class requires the dimensions of 
+desired screen in pixels and the desired maximum update rate of the Simulation::
+    screen_dim = 500, 500
+    update_rate = 60
+
+    sim = Simulation(screen_dim, update_rate)
+
