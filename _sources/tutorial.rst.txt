@@ -1,11 +1,13 @@
 Tutorial
-========
+########
 
 .. currentmodule:: amr_sim
 
-
 Basics
-------
+======
+
+Minimum Requirements
+--------------------
 
 Import
 ++++++
@@ -19,13 +21,15 @@ simulation is :class:`Simulation` and :class:`basic_images`::
 
 Create screen
 +++++++++++++
-Creating an instalnce of the :class:`Simulation` class requires the dimensions of 
+Creating an instance of the :class:`Simulation` class requires the dimensions of 
 desired screen in pixels and the desired maximum update rate of the Simulation::
 
     screen_dim = 500, 500
     update_rate = 60
 
     sim = Simulation(screen_dim, update_rate)
+
+.. _Main loop:
 
 Main loop
 +++++++++
@@ -56,11 +60,131 @@ The final main loop should look like the following::
 
     while sim.running:
 
-        # Move, rotate, translate and take any measurements requires here
+        # Retrieve and execute any events
+        sim.events_detection()
+
+        # Move, rotate, translate and take any measurements here
 
         # Update the simulation display
         sim.display()
 
         # Wait to maintain frame rate
         sim.wait()
+
+
+Objects
+-------
+There are two types of objects that can be placed into the simulation environment
+that have collision detection, this means that it interacts with the sensors and
+sprites in the simulation. Once placed these objects are static and cannot be 
+moved or changed.
+
+.. note::
+    For pygame (hence this simulation environment) the coordinate system is
+    based off of an origin in the top left corner of the screen. The positive
+    direction of the x axis is to the right and the y axis is down. Angles are
+    measured with the positive x axis as zero and counter-clockwise is positive.
+
+Lines
++++++
+A line object has a start point, length, direction and width. Example::
+
+    # Coordinates (x, y)
+    start_pos = (40, 300)
+    # Length can be negative or positive
+    length = 100 
+    # This should be the char x or y
+    dir = 'x'
+    # A RGB tuple (r, g, b)
+    colour = (0, 0, 0)
+    # needs to be > 0
+    width = 3
+
+    sim.draw_line(colour, start_pos, dir, length, width)
+
+
+Rectangle
++++++++++
+A rectangle object has start point, width, height, thickness if the thickness is 0 solid fill
+is applied. The start point is the top left corner of the rectangle and all 
+dimensions are the external edges of the rectangle. Example::
+
+    # Coordinates (x, y)
+    corner = (60, 30)
+    # Width and Height can be negative or positive
+    height = 100
+    width = 50
+    # Border thickness moves inwards, cannot be negative
+    # and uses full fill if 0
+    thickness = 10
+    # A RGB tuple (r, g, b)
+    colour = (0, 0, 0)
+
+    sim.draw_rect( colour, corner, width, height, thickness)
+
+Sprites
+-------
+Sprites are movable objects which interact with object and sensors. These
+Sprites can be user controlled or autonomous.
+
+Initialisation
+++++++++++++++
+There are few different types of Sprites, in this tutorial we are going to use
+the most simple one, the dot sprite. For other types of sprites have a look at
+the API documentation under the :ref:`Sprites` heading. The dot sprite only 
+requires a location to be generated, but the radius and image of the dot can be
+customised if desired, for more information see :ref:`Custom Sprite Images`.
+The sprites should be initialised after any static objects before them main loop
+so any collisions will throw an exception. Example::
+
+    # The center point where the dot will be initialised
+    center_point = (400, 450)
+
+    dot = sim.init_dot(center_point)
+
+Moving
+++++++
+Every sprite has a custom move() function depending on their behaviour so this
+should be read about before implementation. The dot move function is a simple
+translation at a set speed an example how this can be done using the arrow keys
+as inputs::
+
+    # This speed is pixels per second
+    speed = 50
+
+    # Retrieve the current state of the arrow keys
+    right, up = sim.arrow_keys()
+
+    # Move the dot
+    dot.move(right*speed, -up*speed)
+    # Note: up is negative because y positive is down
+
+.. note:: As described in the :ref:`Main loop` section this should occur after
+          the event detection and before updating the display
+
+
+Intermediate
+============
+
+Ray
+---
+
+Sonar
+-----
+
+Lights
+------
+
+Advanced
+========
+
+.. _Custom Sprite Images:
+
+Custom Sprite Images
+--------------------
+
+Custom Sprite Classes
+---------------------
+
+
 

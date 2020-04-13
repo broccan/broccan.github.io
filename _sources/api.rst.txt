@@ -10,12 +10,14 @@ Simulation Class
 .. autoclass:: Simulation
     :members:
 
+.. _Default Sprite Images:
 
 Default Sprite Images
 ---------------------
 
 .. autoclass:: basic_images
 
+.. _Sprites:
 
 The Sprite Classes
 ------------------
@@ -47,13 +49,15 @@ Light Class and Functions
 
 .. autofunction:: dist_two_points
 
-Sonar Class
------------
+Sensor Classes and Functions
+----------------------------
 
 .. autoclass:: Sonar
     :members:
 
+.. autofunction:: ray
+
 Exceptions
 ----------
 
-.. autofunction:: InitalisationCollision
+.. autofunction:: InitialisationCollision

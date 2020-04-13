@@ -5,18 +5,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Tutorial &#8212; AMR Assignment 0.1 documentation</title>
-    <link rel="stylesheet" href="alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="documentation_options.js"></script>
-    <script src="jquery.js"></script>
-    <script src="underscore.js"></script>
-    <script src="doctools.js"></script>
-    <script src="language_data.js"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="API Reference" href="api.html" />
    
-  <link rel="stylesheet" href="custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
@@ -35,20 +35,22 @@
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="basics">
 <h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="minimum-requirements">
+<h3>Minimum Requirements<a class="headerlink" href="#minimum-requirements" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="import">
-<h3>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h3>
+<h4>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h4>
 <p>amr_sim is built from the pygame library and uses lots of objects
 from this library, so importing the pygame library is required for some
 the use some of the amr_sim objects. The only classes needed for the basic
-simulation is <a class="reference internal" href="api.html#amr_sim.Simulation" title="amr_sim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> and <a class="reference internal" href="api.html#amr_sim.basic_images" title="amr_sim.basic_images"><code class="xref py py-class docutils literal notranslate"><span class="pre">basic_images</span></code></a>:</p>
+simulation is <code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">basic_images</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
-<span class="kn">from</span> <span class="nn">amr_sim</span> <span class="k">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">basic_images</span>
+<span class="kn">from</span> <span class="nn">amr_sim</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">basic_images</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="create-screen">
-<h3>Create screen<a class="headerlink" href="#create-screen" title="Permalink to this headline">¶</a></h3>
-<p>Creating an instalnce of the <a class="reference internal" href="api.html#amr_sim.Simulation" title="amr_sim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class requires the dimensions of
+<h4>Create screen<a class="headerlink" href="#create-screen" title="Permalink to this headline">¶</a></h4>
+<p>Creating an instance of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code> class requires the dimensions of
 desired screen in pixels and the desired maximum update rate of the Simulation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
 <span class="n">update_rate</span> <span class="o">=</span> <span class="mi">60</span>
@@ -58,26 +60,26 @@ desired screen in pixels and the desired maximum update rate of the Simulation:<
 </div>
 </div>
 <div class="section" id="main-loop">
-<h3>Main loop<a class="headerlink" href="#main-loop" title="Permalink to this headline">¶</a></h3>
+<span id="id1"></span><h4>Main loop<a class="headerlink" href="#main-loop" title="Permalink to this headline">¶</a></h4>
 <p>There is inbuilt functions to end the Simulation when the window is closed, these
-functions are tied to the variable <a class="reference internal" href="api.html#amr_sim.Simulation.running" title="amr_sim.Simulation.running"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Simulation.running</span></code></a>, so the while loop
+functions are tied to the variable <code class="xref py py-attr docutils literal notranslate"><span class="pre">Simulation.running</span></code>, so the while loop
 should start with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
 </pre></div>
 </div>
-<p>The main loop also needs to run <a class="reference internal" href="api.html#amr_sim.Simulation.events_detection" title="amr_sim.Simulation.events_detection"><code class="xref py py-func docutils literal notranslate"><span class="pre">Simulation.events_detection()</span></code></a> to get the events
+<p>The main loop also needs to run <code class="xref py py-func docutils literal notranslate"><span class="pre">Simulation.events_detection()</span></code> to get the events
 which end the while loop.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">events_detection</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>To display the all objects that have been placed into the simulation (none at this
-point in time) <a class="reference internal" href="api.html#amr_sim.Simulation.update_display" title="amr_sim.Simulation.update_display"><code class="xref py py-func docutils literal notranslate"><span class="pre">Simulation.update_display()</span></code></a> needs to be run after all movements have
+point in time) <code class="xref py py-func docutils literal notranslate"><span class="pre">Simulation.update_display()</span></code> needs to be run after all movements have
 occurred.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">update_display</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>To reduce the load on the cpu and update the pygame.Clock for speed calculations the
-<a class="reference internal" href="api.html#amr_sim.Simulation.wait" title="amr_sim.Simulation.wait"><code class="xref py py-func docutils literal notranslate"><span class="pre">Simulation.wait()</span></code></a> function needs to be called, where the program will pause to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">Simulation.wait()</span></code> function needs to be called, where the program will pause to
 match the frame rate set when initialising the <code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span> <span class="pre">instance</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 </pre></div>
@@ -85,7 +87,10 @@ match the frame rate set when initialising the <code class="xref py py-class doc
 <p>The final main loop should look like the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
 
-    <span class="c1"># Move, rotate, translate and take any measurements requires here</span>
+    <span class="c1"># Retrieve and execute any events</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">events_detection</span><span class="p">()</span>
+
+    <span class="c1"># Move, rotate, translate and take any measurements here</span>
 
     <span class="c1"># Update the simulation display</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
@@ -94,6 +99,124 @@ match the frame rate set when initialising the <code class="xref py py-class doc
     <span class="n">sim</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="objects">
+<h3>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h3>
+<p>There are two types of objects that can be placed into the simulation environment
+that have collision detection, this means that it interacts with the sensors and
+sprites in the simulation. Once placed these objects are static and cannot be
+moved or changed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For pygame (hence this simulation environment) the coordinate system is
+based off of an origin in the top left corner of the screen. The positive
+direction of the x axis is to the right and the y axis is down. Angles are
+measured with the positive x axis as zero and counter-clockwise is positive.</p>
+</div>
+<div class="section" id="lines">
+<h4>Lines<a class="headerlink" href="#lines" title="Permalink to this headline">¶</a></h4>
+<p>A line object has a start point, length, direction and width. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates (x, y)</span>
+<span class="n">start_pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="c1"># Length can be negative or positive</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># This should be the char x or y</span>
+<span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+<span class="c1"># A RGB tuple (r, g, b)</span>
+<span class="n">colour</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># needs to be &gt; 0</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">sim</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">colour</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rectangle">
+<h4>Rectangle<a class="headerlink" href="#rectangle" title="Permalink to this headline">¶</a></h4>
+<p>A rectangle object has start point, width, height, thickness if the thickness is 0 solid fill
+is applied. The start point is the top left corner of the rectangle and all
+dimensions are the external edges of the rectangle. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates (x, y)</span>
+<span class="n">corner</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="c1"># Width and Height can be negative or positive</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Border thickness moves inwards, cannot be negative</span>
+<span class="c1"># and uses full fill if 0</span>
+<span class="n">thickness</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># A RGB tuple (r, g, b)</span>
+<span class="n">colour</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">sim</span><span class="o">.</span><span class="n">draw_rect</span><span class="p">(</span> <span class="n">colour</span><span class="p">,</span> <span class="n">corner</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sprites">
+<h3>Sprites<a class="headerlink" href="#sprites" title="Permalink to this headline">¶</a></h3>
+<p>Sprites are movable objects which interact with object and sensors. These
+Sprites can be user controlled or autonomous.</p>
+<div class="section" id="initialisation">
+<h4>Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this headline">¶</a></h4>
+<p>There are few different types of Sprites, in this tutorial we are going to use
+the most simple one, the dot sprite. For other types of sprites have a look at
+the API documentation under the <a class="reference internal" href="api.html#sprites"><span class="std std-ref">The Sprite Classes</span></a> heading. The dot sprite only
+requires a location to be generated, but the radius and image of the dot can be
+customised if desired, for more information see <a class="reference internal" href="#custom-sprite-images"><span class="std std-ref">Custom Sprite Images</span></a>.
+The sprites should be initialised after any static objects before them main loop
+so any collisions will throw an exception. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The center point where the dot will be initialised</span>
+<span class="n">center_point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">)</span>
+
+<span class="n">dot</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">init_dot</span><span class="p">(</span><span class="n">center_point</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="moving">
+<h4>Moving<a class="headerlink" href="#moving" title="Permalink to this headline">¶</a></h4>
+<p>Every sprite has a custom move() function depending on their behaviour so this
+should be read about before implementation. The dot move function is a simple
+translation at a set speed an example how this can be done using the arrow keys
+as inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This speed is pixels per second</span>
+<span class="n">speed</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Retrieve the current state of the arrow keys</span>
+<span class="n">right</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">arrow_keys</span><span class="p">()</span>
+
+<span class="c1"># Move the dot</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">right</span><span class="o">*</span><span class="n">speed</span><span class="p">,</span> <span class="o">-</span><span class="n">up</span><span class="o">*</span><span class="n">speed</span><span class="p">)</span>
+<span class="c1"># Note: up is negative because y positive is down</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As described in the <a class="reference internal" href="#main-loop"><span class="std std-ref">Main loop</span></a> section this should occur after
+the event detection and before updating the display</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="intermediate">
+<h2>Intermediate<a class="headerlink" href="#intermediate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ray">
+<h3>Ray<a class="headerlink" href="#ray" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="sonar">
+<h3>Sonar<a class="headerlink" href="#sonar" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="lights">
+<h3>Lights<a class="headerlink" href="#lights" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="custom-sprite-images">
+<span id="id2"></span><h3>Custom Sprite Images<a class="headerlink" href="#custom-sprite-images" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="custom-sprite-classes">
+<h3>Custom Sprite Classes<a class="headerlink" href="#custom-sprite-classes" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>
@@ -120,9 +243,20 @@ match the frame rate set when initialising the <code class="xref py py-class doc
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#basics">Basics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#import">Import</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-screen">Create screen</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#main-loop">Main loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minimum-requirements">Minimum Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objects">Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sprites">Sprites</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#intermediate">Intermediate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ray">Ray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sonar">Sonar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lights">Lights</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced">Advanced</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#custom-sprite-images">Custom Sprite Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-sprite-classes">Custom Sprite Classes</a></li>
 </ul>
 </li>
 </ul>
@@ -163,7 +297,7 @@ match the frame rate set when initialising the <code class="xref py py-class doc
       &copy;2020, Brennan Penfold.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
