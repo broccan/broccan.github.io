@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <title>API Reference &#8212; AMR Assignment 0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="documentation_options.js"></script>
+    <script src="jquery.js"></script>
+    <script src="underscore.js"></script>
+    <script src="doctools.js"></script>
+    <script src="language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorials" href="tute_index.html" />
     <link rel="prev" title="Welcome to AMR Assignment’s documentation!" href="index.html" />
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
@@ -1044,11 +1044,12 @@ creation</p>
 <h3>Sonar Class<a class="headerlink" href="#sonar-class" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="amr_sim.Sonar">
-<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Sonar</code><span class="sig-paren">(</span><em class="sig-param">angle</em>, <em class="sig-param">beam_width</em>, <em class="sig-param">max_length</em>, <em class="sig-param">density=1</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">amr_sim.</code><code class="sig-name descname">Sonar</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">beam_width</em>, <em class="sig-param">max_length</em>, <em class="sig-param">density=1</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class that uses rays at set angle to simulate a sonar sensor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – Simulation instance to place the sonar on</p></li>
 <li><p><strong>angle</strong> (<em>int</em>) – The local angle the sonar beam is pointing in degrees</p></li>
 <li><p><strong>beam_width</strong> (<em>float</em><em> or </em><em>int</em>) – The angle width of the sonar beam</p></li>
 <li><p><strong>max_length</strong> (<em>float</em><em> or </em><em>int</em>) – The maximum length of the beam</p></li>
@@ -1058,12 +1059,34 @@ creation</p>
 </dl>
 <dl class="method">
 <dt id="amr_sim.Sonar.get_dist">
-<code class="sig-name descname">get_dist</code><span class="sig-paren">(</span><em class="sig-param">sim</em>, <em class="sig-param">location</em>, <em class="sig-param">rotation</em>, <em class="sig-param">visible=False</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar.get_dist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_dist</code><span class="sig-paren">(</span><em class="sig-param">location</em>, <em class="sig-param">rotation</em>, <em class="sig-param">visible=False</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar.get_dist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the distance from the sonar module</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sim</strong> (<a class="reference internal" href="#amr_sim.Simulation" title="amr_sim.Simulation"><em>Simulation</em></a>) – Simulation instance to place the sonar on</p></li>
+<li><p><strong>location</strong> (<a class="reference external" href="http://www.pygame.org/docs/ref/math.html#pygame.math.Vector2">pygame.math.Vector2</a>) – the global point where the sonar comes from</p></li>
+<li><p><strong>rotation</strong> (<em>float</em>) – The global angle of the sonar beam</p></li>
+<li><p><strong>visible</strong> (<em>bool</em>) – Flag to set to draw dots or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The length to detected object and the local point where it
+it was detected, this point is None if no object detected</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float, <a class="reference external" href="http://www.pygame.org/docs/ref/math.html#pygame.math.Vector2">pygame.math.Vector2</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="amr_sim.Sonar.get_dist_w_model">
+<code class="sig-name descname">get_dist_w_model</code><span class="sig-paren">(</span><em class="sig-param">location</em>, <em class="sig-param">rotation</em>, <em class="sig-param">len_func</em>, <em class="sig-param">visible=False</em><span class="sig-paren">)</span><a class="headerlink" href="#amr_sim.Sonar.get_dist_w_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the distance from the sonar module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>len_func</strong> (<em>func</em><em>(</em><em>float</em><em>)</em><em>: float</em>) – This function to apply to the length value</p></li>
 <li><p><strong>location</strong> (<a class="reference external" href="http://www.pygame.org/docs/ref/math.html#pygame.math.Vector2">pygame.math.Vector2</a>) – the global point where the sonar comes from</p></li>
 <li><p><strong>rotation</strong> (<em>float</em>) – The global angle of the sonar beam</p></li>
 <li><p><strong>visible</strong> (<em>bool</em>) – Flag to set to draw dots or not</p></li>

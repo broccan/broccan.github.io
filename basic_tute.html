@@ -159,6 +159,10 @@ dimensions are the external edges of the rectangle. Example:</p>
 Sprites can be user controlled or autonomous.</p>
 <div class="section" id="initialisation">
 <h3>Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this headline">¶</a></h3>
+<p>To use the <a class="reference internal" href="api.html#amr_sim.Dot" title="amr_sim.Dot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dot</span></code></a> first you need to import the class for amr_sim. i.e:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amr_sim</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Dot</span>
+</pre></div>
+</div>
 <p>There are few different types of Sprites, in this tutorial we are going to use
 the most simple one, the dot sprite. For other types of sprites have a look at
 the API documentation under the <a class="reference internal" href="api.html#sprites"><span class="std std-ref">The Sprite Classes</span></a> heading. The dot sprite only
@@ -169,7 +173,7 @@ Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The center point where the dot will be initialised</span>
 <span class="n">center_point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">)</span>
 
-<span class="n">dot</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">init_dot</span><span class="p">(</span><span class="n">center_point</span><span class="p">)</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">center_point</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -222,7 +226,6 @@ the event detection and before updating the display</p>
 <li class="toctree-l1 current"><a class="reference internal" href="tute_index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intermediate_tute.html">Intermediate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_tute.html">Advanced</a></li>
 </ul>
 </li>
 </ul>

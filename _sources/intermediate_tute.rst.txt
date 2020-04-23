@@ -32,12 +32,13 @@ reflected in the setup::
 
 The sonar module is relatively easy to setup in itself but then requires
 the location in a `pygame.math.Vector2 <http://www.pygame.org/docs/ref/math.html#pygame.math.Vector2>`__.
+But the you need the position and orientation parameters at run time.
 So it should look something like this::
 
     # Create sonar instance
-    angle = 90
+    angle = -90
     location = pygame.math.Vector2(250, 500)
-    sonar = Sonar(direction, 30, 400)
+    sonar = Sonar(30, 400)
 
 Sonar Main Loop
 +++++++++++++++
@@ -63,7 +64,7 @@ the entire loop should look something like this::
         sim.update_display(False)
 
         # Update Sonar
-        sonar.get_dist(sim, location, 0, True)
+        sonar.get_dist(sim, location, angle, True)
 
         # Update the display
         pygame.display.flip()
@@ -89,9 +90,9 @@ All added together the final results should look something like this::
     dot = Dot(sim, (100, 200))
 
     # Create sonar instance
-    angle = 0
+    angle = -90
     location = pygame.math.Vector2(250, 500)
-    sonar = Sonar(direction, 30, 400)
+    sonar = Sonar(30, 400)
 
     while sim.running:
 
@@ -110,7 +111,7 @@ All added together the final results should look something like this::
         sim.update_display(False)
 
         # Update Sonar
-        sonar.get_dist(sim, location, 0, True)
+        sonar.get_dist(sim, location, angle, True)
 
         # Update the display
         pygame.display.flip()

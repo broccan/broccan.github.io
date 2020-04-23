@@ -129,6 +129,10 @@ Sprites can be user controlled or autonomous.
 
 Initialisation
 ++++++++++++++
+To use the :class:`Dot` first you need to import the class for amr_sim. i.e::
+
+    from amr_sim import Simulation, Dot
+
 There are few different types of Sprites, in this tutorial we are going to use
 the most simple one, the dot sprite. For other types of sprites have a look at
 the API documentation under the :ref:`Sprites` heading. The dot sprite only 
@@ -140,7 +144,7 @@ Example::
     # The center point where the dot will be initialised
     center_point = (400, 450)
 
-    dot = sim.init_dot(center_point)
+    dot = Dot(sim, center_point)
 
 Moving
 ++++++
