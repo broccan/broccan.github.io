@@ -1,11 +1,11 @@
 API Reference
-=============
+#############
 
 .. currentmodule:: amr_sim
 
 
 Simulation Class
-----------------
+================
 
 .. autoclass:: Simulation
     :members:
@@ -13,51 +13,79 @@ Simulation Class
 .. _Default Sprite Images:
 
 Default Sprite Images
----------------------
+=====================
 
-.. autoclass:: basic_images
+.. autoclass:: Basic_images
 
 .. _Sprites:
 
 The Sprite Classes
-------------------
+==================
+
+Sprite Parent Class
+-------------------
 
 .. autoclass:: Sprite
     :members:
 
+Dot class
+---------
+
 .. autoclass:: Dot
     :members:
+
+Vehicle Class
+-------------
 
 .. autoclass:: Vehicle
     :members:
 
+Differential Drive Class
+------------------------
 .. autoclass:: DifferentialDrive
     :members:
 
+Vacuum Cleaner Class
+--------------------
+
+.. autoclass:: VacuumCleaner
+    :members:
+
 Position Class
---------------
+==============
 .. autoclass:: Position
     :members:
 
 Light Class and Functions
--------------------------
+=========================
 
+Light Class
+-----------
 .. autoclass:: Light
     :members:
+
+Light Functions
+---------------
 
 .. autofunction:: mix_colour
 
 .. autofunction:: dist_two_points
 
 Sensor Classes and Functions
-----------------------------
+============================
+
+Sonar Class
+-----------
 
 .. autoclass:: Sonar
     :members:
 
+Ray Function
+------------
+
 .. autofunction:: ray
 
 Exceptions
-----------
+==========
 
 .. autofunction:: InitialisationCollision

@@ -1,0 +1,257 @@
+.. currentmodule:: amr_sim
+
+.. _Intermediate Tutorial:
+
+Intermediate
+============
+
+Sonar
+-----
+The sonar class is a simulated sensor that detects the closest obstacle in
+an arc pattern. This tutorial simulated and displays a basic sonar sensor.
+
+Sonar setup
++++++++++++
+
+This tutorial runs a code that is almost identical to the minimum requirements
+with a dot sprite, the only addition is adding a Sonar module. This is
+reflected in the setup::
+
+    import pygame
+    from .. import Simulation, Sonar, Dot
+
+    # Create a simulation screen set to 60fps
+    screen_dim = 500, 500
+    sim = Simulation(screen_dim, 60)
+
+    # Set the travel speed of the dot in px/s
+    speed = 100
+
+    # Create dot sprite
+    dot = Dot(sim, (100, 200))
+
+The sonar module is relatively easy to setup in itself but then requires
+the location in a `pygame.math.Vector2 <http://www.pygame.org/docs/ref/math.html#pygame.math.Vector2>`__.
+So it should look something like this::
+
+    # Create sonar instance
+    angle = 90
+    location = pygame.math.Vector2(250, 500)
+    sonar = Sonar(direction, 30, 400)
+
+Sonar Main Loop
++++++++++++++++
+The main loop is the same as a basic dot sprite setup but places a static sonar
+sensor. For this to be visible this needs to occur after the display update 
+(which has the flip flag set to False) but before the render function. i.e.
+the entire loop should look something like this::
+
+    while sim.running:
+
+        # get any pygame events like game end and keypresses
+        sim.events_detection()
+
+        # Retrieve the current state of the arrow keys
+        right, up = sim.arrow_keys()
+
+        # Move the dot
+        dot.move(right*speed, -up*speed)
+        # Note: up is - because origin is top left
+        #       corner and y positive is down
+
+        # Update the display and render
+        sim.update_display(False)
+
+        # Update Sonar
+        sonar.get_dist(sim, location, 0, True)
+
+        # Update the display
+        pygame.display.flip()
+
+        # Wait to maintain update rate and stores time for speed calcs
+        sim.wait()
+
+Sonar Full code:
++++++++++++++++++++++
+All added together the final results should look something like this::
+
+    import pygame
+    from .. import Simulation, Sonar, Dot
+
+    # Create a simulation screen set to 60fps
+    screen_dim = 500, 500
+    sim = Simulation(screen_dim, 60)
+
+    # Set the travel speed of the dot in px/s
+    speed = 100
+
+    # Create dot sprite
+    dot = Dot(sim, (100, 200))
+
+    # Create sonar instance
+    angle = 0
+    location = pygame.math.Vector2(250, 500)
+    sonar = Sonar(direction, 30, 400)
+
+    while sim.running:
+
+        # get any pygame events like game end and keypresses
+        sim.events_detection()
+
+        # Retrieve the current state of the arrow keys
+        right, up = sim.arrow_keys()
+
+        # Move the dot
+        dot.move(right*speed, -up*speed)
+        # Note: up is - because origin is top left
+        #       corner and y positive is down
+
+        # Update the display and render
+        sim.update_display(False)
+
+        # Update Sonar
+        sonar.get_dist(sim, location, 0, True)
+
+        # Update the display
+        pygame.display.flip()
+
+        # Wait to maintain update rate and stores time for speed calcs
+        sim.wait()
+
+
+
+Moving Ray
+----------
+A ray is a function that can be used to find the distance from a point to the
+closest object at a set angle. This tutorial shows you how to "attach" the ray
+to a sprite as a simulated sensor.
+
+Ray Setup
++++++++++
+
+This Tutorial uses the typical basic setup using a vehicle sprite. Along with
+The usual imports you also need the :func:`ray` function and the :class:`Basic_images`
+class which is used to get the car dimensions. The initial setup should look
+something like this::
+
+    import pygame
+    from .. import Simulation, Vehicle, ray, Basic_images
+
+    # Create a simulation screen set to 60fps
+    screen_dim = 500, 500
+    sim = Simulation(screen_dim, 60)
+
+    # Set the travel speed of the vehicle
+    speed = 100
+
+    # Create vehicle sprite
+    car = Vehicle(sim, (100, 200))
+
+Ray initialisation
+++++++++++++++++++
+
+For the ray initialisation there is no containing class and all the calculations
+are based upon vector maths. So set the location of the ray in local coordinates
+of the vehicle which will be transformed to global coordinates later::
+
+    # Ray local position and angle relative to the car frame
+    dist = Basic_images.Car.width/2 + 1
+    ray_pos_local = pygame.Vector2((dist, 0))
+    ray_angle_local = 30
+
+    # The ray colour
+    red = (255, 0, 0)
+
+Ray main loop
++++++++++++++
+
+The main loop should look pretty similar to most other basic codes except for 2
+significant differences, the calculation of the ray location and the displaying 
+of the ray.
+
+The location of the ray is calculated using the :func:`~Position.local_to_global` function
+from the sprite position. The angle of the ray is calculated by adding the angle
+of the sprite and the local angle of the ray. This should occur after the movement
+of the vehicle to avoid a one step behind delay. Example::
+
+    # Get ray global position and angle
+    ray_pos_global = car.pos.local_to_global(ray_pos_local)
+    ray_angle_global = car.pos.angle + ray_angle_local
+
+These values are then passed into the :func:`ray` function::
+
+    # Generate the ray
+    length, end_point = ray(sim, ray_pos_global, ray_angle_global)
+    print("Distance measured is: {}".format(length))
+
+Using the endpoint the line can be drawn and the display update where
+the 'flip' flag to be set to false in the 
+:func:`sim.update_display <Simulation.update_display>` so the ray can be
+drawn before the rendering. i.e::
+
+    # Update the display but don't render
+    sim.update_display(flip=False)
+
+    # Display the ray as a line
+    pygame.draw.line(sim.screen, red, ray_pos_global, end_point)
+
+    # Render the environment
+    pygame.display.flip()
+
+Moving Ray Full code:
++++++++++++++++++++++
+So the final results should look something like this::
+
+    import pygame
+    from .. import Simulation, Vehicle, ray, Basic_images
+
+    # Create a simulation screen set to 60fps
+    screen_dim = 500, 500
+    sim = Simulation(screen_dim, 60)
+
+    # Set the travel speed of the dot in m/s
+    speed = 100
+
+    # Create dot sprite
+    car = Vehicle(sim, (100, 200))
+
+    # Ray local position and angle relative to the car frame
+    dist = Basic_images.Car.width/2 + 1
+    ray_pos_local = pygame.Vector2((dist, 0))
+    ray_angle_local = 30
+
+    # The ray colour
+    red = (255, 0, 0)
+
+    while sim.running:
+
+        # get any pygame events like game end and keypresses
+        sim.events_detection()
+
+        # Retrieve the current state of the arrow keys
+        right, up = sim.arrow_keys()
+
+        # Move the car
+        car.move(up*speed)
+        car.rotate_vel(-right*speed)
+
+        # Get ray global position and angle
+        ray_pos_global = car.pos.local_to_global(ray_pos_local)
+        ray_angle_global = car.pos.angle + ray_angle_local
+
+        # Generate the ray
+        length, end_point = ray(sim, ray_pos_global, ray_angle_global)
+
+
+        print("Distance measured is: {}".format(length))
+        # Update the display
+        sim.update_display(flip=False)
+
+        # Display the ray
+        pygame.draw.line(sim.screen, red, ray_pos_global, end_point)
+
+        # Render the env
+        pygame.display.flip()
+
+        # Wait to maintain update rate and stores time for speed calcs
+        sim.wait()

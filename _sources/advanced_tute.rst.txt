@@ -1,0 +1,12 @@
+.. currentmodule:: amr_sim
+
+Advanced
+========
+
+.. _Custom Sprite Images:
+
+Custom Sprite Images
+--------------------
+
+Custom Sprite Classes
+---------------------

@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Intermediate &#8212; AMR Assignment 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced" href="advanced_tute.html" />
+    <link rel="prev" title="Basics" href="basic_tute.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="intermediate">
+<span id="intermediate-tutorial"></span><h1>Intermediate<a class="headerlink" href="#intermediate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sonar">
+<h2>Sonar<a class="headerlink" href="#sonar" title="Permalink to this headline">¶</a></h2>
+<p>The sonar class is a simulated sensor that detects the closest obstacle in
+an arc pattern. This tutorial simulated and displays a basic sonar sensor.</p>
+<div class="section" id="sonar-setup">
+<h3>Sonar setup<a class="headerlink" href="#sonar-setup" title="Permalink to this headline">¶</a></h3>
+<p>This tutorial runs a code that is almost identical to the minimum requirements
+with a dot sprite, the only addition is adding a Sonar module. This is
+reflected in the setup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Sonar</span><span class="p">,</span> <span class="n">Dot</span>
+
+<span class="c1"># Create a simulation screen set to 60fps</span>
+<span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">screen_dim</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Set the travel speed of the dot in px/s</span>
+<span class="n">speed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Create dot sprite</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The sonar module is relatively easy to setup in itself but then requires
+the location in a <a class="reference external" href="http://www.pygame.org/docs/ref/math.html#pygame.math.Vector2">pygame.math.Vector2</a>.
+So it should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create sonar instance</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">sonar</span> <span class="o">=</span> <span class="n">Sonar</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sonar-main-loop">
+<h3>Sonar Main Loop<a class="headerlink" href="#sonar-main-loop" title="Permalink to this headline">¶</a></h3>
+<p>The main loop is the same as a basic dot sprite setup but places a static sonar
+sensor. For this to be visible this needs to occur after the display update
+(which has the flip flag set to False) but before the render function. i.e.
+the entire loop should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+
+    <span class="c1"># get any pygame events like game end and keypresses</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">events_detection</span><span class="p">()</span>
+
+    <span class="c1"># Retrieve the current state of the arrow keys</span>
+    <span class="n">right</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">arrow_keys</span><span class="p">()</span>
+
+    <span class="c1"># Move the dot</span>
+    <span class="n">dot</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">right</span><span class="o">*</span><span class="n">speed</span><span class="p">,</span> <span class="o">-</span><span class="n">up</span><span class="o">*</span><span class="n">speed</span><span class="p">)</span>
+    <span class="c1"># Note: up is - because origin is top left</span>
+    <span class="c1">#       corner and y positive is down</span>
+
+    <span class="c1"># Update the display and render</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Update Sonar</span>
+    <span class="n">sonar</span><span class="o">.</span><span class="n">get_dist</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Update the display</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="c1"># Wait to maintain update rate and stores time for speed calcs</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sonar-full-code">
+<h3>Sonar Full code:<a class="headerlink" href="#sonar-full-code" title="Permalink to this headline">¶</a></h3>
+<p>All added together the final results should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Sonar</span><span class="p">,</span> <span class="n">Dot</span>
+
+<span class="c1"># Create a simulation screen set to 60fps</span>
+<span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">screen_dim</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Set the travel speed of the dot in px/s</span>
+<span class="n">speed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Create dot sprite</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+
+<span class="c1"># Create sonar instance</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">sonar</span> <span class="o">=</span> <span class="n">Sonar</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+
+    <span class="c1"># get any pygame events like game end and keypresses</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">events_detection</span><span class="p">()</span>
+
+    <span class="c1"># Retrieve the current state of the arrow keys</span>
+    <span class="n">right</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">arrow_keys</span><span class="p">()</span>
+
+    <span class="c1"># Move the dot</span>
+    <span class="n">dot</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">right</span><span class="o">*</span><span class="n">speed</span><span class="p">,</span> <span class="o">-</span><span class="n">up</span><span class="o">*</span><span class="n">speed</span><span class="p">)</span>
+    <span class="c1"># Note: up is - because origin is top left</span>
+    <span class="c1">#       corner and y positive is down</span>
+
+    <span class="c1"># Update the display and render</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Update Sonar</span>
+    <span class="n">sonar</span><span class="o">.</span><span class="n">get_dist</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Update the display</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="c1"># Wait to maintain update rate and stores time for speed calcs</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="moving-ray">
+<h2>Moving Ray<a class="headerlink" href="#moving-ray" title="Permalink to this headline">¶</a></h2>
+<p>A ray is a function that can be used to find the distance from a point to the
+closest object at a set angle. This tutorial shows you how to “attach” the ray
+to a sprite as a simulated sensor.</p>
+<div class="section" id="ray-setup">
+<h3>Ray Setup<a class="headerlink" href="#ray-setup" title="Permalink to this headline">¶</a></h3>
+<p>This Tutorial uses the typical basic setup using a vehicle sprite. Along with
+The usual imports you also need the <a class="reference internal" href="api.html#amr_sim.ray" title="amr_sim.ray"><code class="xref py py-func docutils literal notranslate"><span class="pre">ray()</span></code></a> function and the <a class="reference internal" href="api.html#amr_sim.Basic_images" title="amr_sim.Basic_images"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic_images</span></code></a>
+class which is used to get the car dimensions. The initial setup should look
+something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">Basic_images</span>
+
+<span class="c1"># Create a simulation screen set to 60fps</span>
+<span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">screen_dim</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Set the travel speed of the vehicle</span>
+<span class="n">speed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Create vehicle sprite</span>
+<span class="n">car</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ray-initialisation">
+<h3>Ray initialisation<a class="headerlink" href="#ray-initialisation" title="Permalink to this headline">¶</a></h3>
+<p>For the ray initialisation there is no containing class and all the calculations
+are based upon vector maths. So set the location of the ray in local coordinates
+of the vehicle which will be transformed to global coordinates later:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ray local position and angle relative to the car frame</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">Basic_images</span><span class="o">.</span><span class="n">Car</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">ray_pos_local</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Vector2</span><span class="p">((</span><span class="n">dist</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">ray_angle_local</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># The ray colour</span>
+<span class="n">red</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ray-main-loop">
+<h3>Ray main loop<a class="headerlink" href="#ray-main-loop" title="Permalink to this headline">¶</a></h3>
+<p>The main loop should look pretty similar to most other basic codes except for 2
+significant differences, the calculation of the ray location and the displaying
+of the ray.</p>
+<p>The location of the ray is calculated using the <a class="reference internal" href="api.html#amr_sim.Position.local_to_global" title="amr_sim.Position.local_to_global"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_to_global()</span></code></a> function
+from the sprite position. The angle of the ray is calculated by adding the angle
+of the sprite and the local angle of the ray. This should occur after the movement
+of the vehicle to avoid a one step behind delay. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get ray global position and angle</span>
+<span class="n">ray_pos_global</span> <span class="o">=</span> <span class="n">car</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">local_to_global</span><span class="p">(</span><span class="n">ray_pos_local</span><span class="p">)</span>
+<span class="n">ray_angle_global</span> <span class="o">=</span> <span class="n">car</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">angle</span> <span class="o">+</span> <span class="n">ray_angle_local</span>
+</pre></div>
+</div>
+<p>These values are then passed into the <a class="reference internal" href="api.html#amr_sim.ray" title="amr_sim.ray"><code class="xref py py-func docutils literal notranslate"><span class="pre">ray()</span></code></a> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the ray</span>
+<span class="n">length</span><span class="p">,</span> <span class="n">end_point</span> <span class="o">=</span> <span class="n">ray</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">ray_pos_global</span><span class="p">,</span> <span class="n">ray_angle_global</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distance measured is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Using the endpoint the line can be drawn and the display update where
+the ‘flip’ flag to be set to false in the
+<a class="reference internal" href="api.html#amr_sim.Simulation.update_display" title="amr_sim.Simulation.update_display"><code class="xref py py-func docutils literal notranslate"><span class="pre">sim.update_display</span></code></a> so the ray can be
+drawn before the rendering. i.e:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the display but don&#39;t render</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Display the ray as a line</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">ray_pos_global</span><span class="p">,</span> <span class="n">end_point</span><span class="p">)</span>
+
+<span class="c1"># Render the environment</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="moving-ray-full-code">
+<h3>Moving Ray Full code:<a class="headerlink" href="#moving-ray-full-code" title="Permalink to this headline">¶</a></h3>
+<p>So the final results should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">Basic_images</span>
+
+<span class="c1"># Create a simulation screen set to 60fps</span>
+<span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">screen_dim</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Set the travel speed of the dot in m/s</span>
+<span class="n">speed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Create dot sprite</span>
+<span class="n">car</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+
+<span class="c1"># Ray local position and angle relative to the car frame</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">Basic_images</span><span class="o">.</span><span class="n">Car</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">ray_pos_local</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Vector2</span><span class="p">((</span><span class="n">dist</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">ray_angle_local</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># The ray colour</span>
+<span class="n">red</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+
+    <span class="c1"># get any pygame events like game end and keypresses</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">events_detection</span><span class="p">()</span>
+
+    <span class="c1"># Retrieve the current state of the arrow keys</span>
+    <span class="n">right</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">arrow_keys</span><span class="p">()</span>
+
+    <span class="c1"># Move the car</span>
+    <span class="n">car</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">up</span><span class="o">*</span><span class="n">speed</span><span class="p">)</span>
+    <span class="n">car</span><span class="o">.</span><span class="n">rotate_vel</span><span class="p">(</span><span class="o">-</span><span class="n">right</span><span class="o">*</span><span class="n">speed</span><span class="p">)</span>
+
+    <span class="c1"># Get ray global position and angle</span>
+    <span class="n">ray_pos_global</span> <span class="o">=</span> <span class="n">car</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">local_to_global</span><span class="p">(</span><span class="n">ray_pos_local</span><span class="p">)</span>
+    <span class="n">ray_angle_global</span> <span class="o">=</span> <span class="n">car</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">angle</span> <span class="o">+</span> <span class="n">ray_angle_local</span>
+
+    <span class="c1"># Generate the ray</span>
+    <span class="n">length</span><span class="p">,</span> <span class="n">end_point</span> <span class="o">=</span> <span class="n">ray</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">ray_pos_global</span><span class="p">,</span> <span class="n">ray_angle_global</span><span class="p">)</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distance measured is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+    <span class="c1"># Update the display</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Display the ray</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">ray_pos_global</span><span class="p">,</span> <span class="n">end_point</span><span class="p">)</span>
+
+    <span class="c1"># Render the env</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="c1"># Wait to maintain update rate and stores time for speed calcs</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">AMR Assignment</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tute_index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_tute.html">Basics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Intermediate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tute.html">Advanced</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="tute_index.html">Tutorials</a><ul>
+      <li>Previous: <a href="basic_tute.html" title="previous chapter">Basics</a></li>
+      <li>Next: <a href="advanced_tute.html" title="next chapter">Advanced</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Brennan Penfold.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/intermediate_tute.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
