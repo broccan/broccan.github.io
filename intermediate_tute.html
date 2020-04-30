@@ -43,7 +43,7 @@ an arc pattern. This tutorial simulated and displays a basic sonar sensor.</p>
 with a dot sprite, the only addition is adding a Sonar module. This is
 reflected in the setup:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Sonar</span><span class="p">,</span> <span class="n">Dot</span>
+<span class="kn">from</span> <span class="nn">amr_sim</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Sonar</span><span class="p">,</span> <span class="n">Dot</span>
 
 <span class="c1"># Create a simulation screen set to 60fps</span>
 <span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
@@ -114,7 +114,7 @@ The usual imports you also need the <a class="reference internal" href="api.html
 class which is used to get the car dimensions. The initial setup should look
 something like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">Basic_images</span>
+<span class="kn">from</span> <span class="nn">amr_sim</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">Basic_images</span>
 
 <span class="c1"># Create a simulation screen set to 60fps</span>
 <span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
@@ -182,7 +182,7 @@ drawn before the rendering. i.e:</p>
 <h3>Moving Ray Full code:<a class="headerlink" href="#moving-ray-full-code" title="Permalink to this headline">¶</a></h3>
 <p>So the final results should look something like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">Basic_images</span>
+<span class="kn">from</span> <span class="nn">amr_sim</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">Basic_images</span>
 
 <span class="c1"># Create a simulation screen set to 60fps</span>
 <span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
