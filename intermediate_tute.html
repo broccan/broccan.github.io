@@ -100,53 +100,6 @@ the entire loop should look something like this:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="sonar-full-code">
-<h3>Sonar Full code:<a class="headerlink" href="#sonar-full-code" title="Permalink to this headline">¶</a></h3>
-<p>All added together the final results should look something like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">Sonar</span><span class="p">,</span> <span class="n">Dot</span>
-
-<span class="c1"># Create a simulation screen set to 60fps</span>
-<span class="n">screen_dim</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
-<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">screen_dim</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-
-<span class="c1"># Set the travel speed of the dot in px/s</span>
-<span class="n">speed</span> <span class="o">=</span> <span class="mi">100</span>
-
-<span class="c1"># Create dot sprite</span>
-<span class="n">dot</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-
-<span class="c1"># Create sonar instance</span>
-<span class="n">angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">90</span>
-<span class="n">location</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">sonar</span> <span class="o">=</span> <span class="n">Sonar</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-
-<span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
-
-    <span class="c1"># get any pygame events like game end and keypresses</span>
-    <span class="n">sim</span><span class="o">.</span><span class="n">events_detection</span><span class="p">()</span>
-
-    <span class="c1"># Retrieve the current state of the arrow keys</span>
-    <span class="n">right</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">arrow_keys</span><span class="p">()</span>
-
-    <span class="c1"># Move the dot</span>
-    <span class="n">dot</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">right</span><span class="o">*</span><span class="n">speed</span><span class="p">,</span> <span class="o">-</span><span class="n">up</span><span class="o">*</span><span class="n">speed</span><span class="p">)</span>
-    <span class="c1"># Note: up is - because origin is top left</span>
-    <span class="c1">#       corner and y positive is down</span>
-
-    <span class="c1"># Update the display and render</span>
-    <span class="n">sim</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="c1"># Update Sonar</span>
-    <span class="n">sonar</span><span class="o">.</span><span class="n">get_dist</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># Update the display</span>
-    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
-
-    <span class="c1"># Wait to maintain update rate and stores time for speed calcs</span>
-    <span class="n">sim</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="moving-ray">
